@@ -1,15 +1,30 @@
 <div>
   <% if @name == "" || !@name %>
     <form action="/New_Game">
-      "What's your name?"
+      What's your name?
       <input type="text" name="name">
       <input type="submit" value="Submit">
     </form>
   <% else %>
     Welcome to Battleships, <%= @name %>!
+    <br><br>
     <table class='board'>
-      
-    </table>  
+      <tr>
+        <td style="font-size:12px; padding:10px; background-color:#ffccee;">
+          board
+        </td>
+      </tr>
+    </table>
+    <br>
+  
+      <form action="/New_Game">
+        <input type="hidden" name="name" value=<%= @name %>> 
+        <input type="text" name="coordinates" >
+        <input type="submit" value="Submit">
+    </form>
+    <% if @coordinates == "A1" %>
+      Location hit
+    <% end %>
   <% end %>
   <% if @name == "" %>
     Please fill in your name

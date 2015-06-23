@@ -10,6 +10,7 @@ class BattleshipsWeb < Sinatra::Base
 
   get '/New_Game' do
     @name = params[:name]
+    @coordinates = params[:coordinates]
     erb :new_game
   end
 

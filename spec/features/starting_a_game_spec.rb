@@ -24,4 +24,12 @@ feature 'Starting a new game' do
     visit '/New_Game?name=Bob'
     expect(page).to have_selector('.board')
   end
+
+  scenario 'the board should allow the user to submit coordinates' do
+    visit '/New_Game?name=Bob'
+    fill_in('coordinates', with: 'A1')
+    click_button('Submit')
+    expect(page).to have_content('Location hit')
+  end
+
 end
