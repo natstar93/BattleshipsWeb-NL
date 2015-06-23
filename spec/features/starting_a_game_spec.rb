@@ -13,4 +13,10 @@ feature 'Starting a new game' do
     click_button('Submit')
     expect(page).to have_content "Welcome to Battleships, Bob"
   end
+
+  scenario 'does not allow name field to be submitted if blank' do
+    visit '/New_Game'
+    click_button('Submit')
+    expect(page).to have_content "Please fill in your name"
+  end
 end
