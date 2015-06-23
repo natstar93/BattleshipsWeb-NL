@@ -11,12 +11,17 @@ feature 'Starting a new game' do
     visit '/New_Game'
     fill_in('name', with: 'Bob')
     click_button('Submit')
-    expect(page).to have_content "Welcome to Battleships, Bob"
+    expect(page).to have_content "Welcome to Battleships, Bob!"
   end
 
   scenario 'does not allow name field to be submitted if blank' do
     visit '/New_Game'
     click_button('Submit')
     expect(page).to have_content "Please fill in your name"
+  end
+
+  scenario 'the new game page should have a board' do
+    visit '/New_Game?name=Bob'
+    expect(page).to have_selector('.board')
   end
 end

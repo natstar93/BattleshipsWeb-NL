@@ -1,5 +1,4 @@
 <div>
-
   <% if @name == "" || !@name %>
     <form action="/New_Game">
       "What's your name?"
@@ -7,7 +6,10 @@
       <input type="submit" value="Submit">
     </form>
   <% else %>
-    Welcome to Battleships, <%= @name %>
+    Welcome to Battleships, <%= @name %>!
+    <table class='board'>
+      
+    </table>  
   <% end %>
   <% if @name == "" %>
     Please fill in your name
