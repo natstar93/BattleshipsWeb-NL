@@ -8,14 +8,14 @@ feature 'Starting a new game' do
   end
 
   scenario 'allows the user to input their name' do
-    visit '/New_Game'
+    visit '/Start'
     fill_in('name', with: 'Bob')
     click_button('Submit')
     expect(page).to have_content "Welcome to Battleships, Bob!"
   end
 
   scenario 'does not allow name field to be submitted if blank' do
-    visit '/New_Game'
+    visit '/Start'
     click_button('Submit')
     expect(page).to have_content "Please fill in your name"
   end
@@ -39,13 +39,6 @@ feature 'Starting a new game' do
    ABCDEFGHIJ')
   end
 
-  xscenario 'the board should allow the user to submit coordinates' do
-    visit '/New_Game?name=Bob'
-    fill_in('coordinates', with: 'A1')
-    click_button('Submit')
-    expect(page).to have_content('Location hit')
-  end
-
   scenario 'the page should prompt user to place a ship' do
     visit '/New_Game?name=Bob'
     expect(page).to have_content('Please place a ship')
@@ -53,7 +46,7 @@ feature 'Starting a new game' do
 
   scenario 'allows the user to enter a valid ship' do
     visit '/New_Game?name=Bob'
-    fill_in('ship', with: 'submarine')
+    select 'Submarine', from: 'ship'
     fill_in('coordinates', with: 'A1')
     #fill_in('orientation', with: 'horizontally')
     select "Vertical", from: "orientation"
@@ -76,7 +69,7 @@ feature 'Starting a new game' do
 
   end
 
-  xscenario 'ship orientation contains a dropdown' do
+  scenario 'ship orientation contains a dropdown' do
     visit '/New_Game?name=Bob'
     expect(page).to have_selector('select')
   end
