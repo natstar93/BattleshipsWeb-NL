@@ -22,7 +22,20 @@ feature 'Starting a new game' do
 
   scenario 'the new game page should have a board' do
     visit '/New_Game?name=Bob'
-    expect(page).to have_selector('.board')
+    expect(page).to have_content('ABCDEFGHIJ
+  ------------
+ 1|          |1
+ 2|          |2
+ 3|          |3
+ 4|          |4
+ 5|          |5
+ 6|          |6
+ 7|          |7
+ 8|          |8
+ 9|          |9
+10|          |10
+  ------------
+   ABCDEFGHIJ')
   end
 
   scenario 'the board should allow the user to submit coordinates' do
@@ -30,6 +43,11 @@ feature 'Starting a new game' do
     fill_in('coordinates', with: 'A1')
     click_button('Submit')
     expect(page).to have_content('Location hit')
+  end
+
+  scenario 'the page should prompt user to place a ship' do
+    visit '/New_Game?name=Bob'
+    expect(page).to have_content('Please place a ship')
   end
 
 end

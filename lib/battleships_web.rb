@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'battleships'
 
 class BattleshipsWeb < Sinatra::Base
 
@@ -9,6 +10,7 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   get '/New_Game' do
+    $game = Game.new Player, Board
     @name = params[:name]
     @coordinates = params[:coordinates]
     erb :new_game

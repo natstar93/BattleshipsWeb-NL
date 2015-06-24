@@ -8,15 +8,16 @@
   <% else %>
     Welcome to Battleships, <%= @name %>!
     <br><br>
-    <table class='board'>
+
+    <pre><%= $game.own_board_view $game.player_1 %></pre>
+<!--     <table class='board'>
       <tr>
         <td style="font-size:12px; padding:10px; background-color:#ffccee;">
           board
         </td>
       </tr>
-    </table>
-    <br>
-  
+    </table> -->
+     Please place a ship
       <form action="/New_Game">
         <input type="hidden" name="name" value=<%= @name %>> 
         <input type="text" name="coordinates" >
