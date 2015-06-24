@@ -51,11 +51,12 @@ feature 'Starting a new game' do
     expect(page).to have_content('Please place a ship')
   end
 
-  scenario 'allows the user to enter a ship type' do
+  scenario 'allows the user to enter a valid ship' do
     visit '/New_Game?name=Bob'
     fill_in('ship', with: 'submarine')
     fill_in('coordinates', with: 'A1')
-    fill_in('orientation', with: 'horizontally')
+    #fill_in('orientation', with: 'horizontally')
+    select "Vertical", from: "orientation"
     click_button('Submit')
     expect(page).to have_content(
    'ABCDEFGHIJ
@@ -75,5 +76,9 @@ feature 'Starting a new game' do
 
   end
 
+  xscenario 'ship orientation contains a dropdown' do
+    visit '/New_Game?name=Bob'
+    expect(page).to have_selector('select')
+  end
 
 end

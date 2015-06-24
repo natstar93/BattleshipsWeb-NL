@@ -22,11 +22,13 @@
         <input type="hidden" name="name" value=<%= @name %>> 
         Ship: <input type="text" name="ship" >
         Coordinates: <input type="text" name="coordinates" >
-        Orientation: 
-        <select>
+        Orientation: <!-- <input type="text" name="orientation" > -->
+
+        <select name="orientation">
           <option name="orientation" value="vertically">Vertical</option>
           <option name="orientation" value="horizontally">Horizontal</option>
         </select>
+
         <input type="submit" value="Submit">
     </form>
 <!--     <% if @coordinates == "A1" %>
