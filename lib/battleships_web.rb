@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'battleships'
+#require 'ship'
 
 class BattleshipsWeb < Sinatra::Base
 
@@ -12,8 +13,15 @@ class BattleshipsWeb < Sinatra::Base
   get '/New_Game' do
     $game = Game.new Player, Board
     @name = params[:name]
-    @coordinates = params[:coordinates]
     erb :new_game
+  end
+
+  post '/Player_Board' do
+    @ship = params[:ship]
+    @coordinates = params[:coordinates]
+    @orientation = params[:orientation]
+    $game.player_1.place_ship Ship.new(@ship), @coordinates, @orientation
+    erb :player_board
   end
 
   # start the server if ruby file executed directly

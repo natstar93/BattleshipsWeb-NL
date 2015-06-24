@@ -18,14 +18,20 @@
       </tr>
     </table> -->
      Please place a ship
-      <form action="/New_Game">
+      <form action="/Player_Board" method="post">
         <input type="hidden" name="name" value=<%= @name %>> 
-        <input type="text" name="coordinates" >
+        Ship: <input type="text" name="ship" >
+        Coordinates: <input type="text" name="coordinates" >
+        Orientation: 
+        <select>
+          <option name="orientation" value="vertically">Vertical</option>
+          <option name="orientation" value="horizontally">Horizontal</option>
+        </select>
         <input type="submit" value="Submit">
     </form>
-    <% if @coordinates == "A1" %>
+<!--     <% if @coordinates == "A1" %>
       Location hit
-    <% end %>
+    <% end %> -->
   <% end %>
   <% if @name == "" %>
     Please fill in your name
