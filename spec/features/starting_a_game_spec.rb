@@ -70,8 +70,18 @@ feature 'Starting a new game' do
   end
 
   scenario 'ship orientation contains a dropdown' do
-    visit '/New_Game?name=Bob'
+    visit '/New_Game'
     expect(page).to have_selector('select')
   end
 
+  scenario 'the new game page should have a start game button' do
+    visit '/New_Game'
+    expect(page).to have_selector('#start_game')
+  end
+
+  #WORST TEST EVER
+  scenario 'the gameplay page should show the player\'s board' do
+    visit '/Gameplay'
+    expect(page).to have_content('ABCDEFGHIJ')
+  end
 end
