@@ -109,4 +109,14 @@ feature 'Starting a new game' do
   ------------
    ABCDEFGHIJ')
   end
+
+  scenario 'the player can enter a coordinate to shoot at' do
+    visit '/New_Game'
+    select 'Submarine', from: 'ship'
+    fill_in('coordinates', with: 'A1')
+    select "Vertical", from: "orientation"
+    click_button('Submit')
+    click_button('Start')
+    expect(page).to have_selector('#Fire')
+  end
 end
