@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative 'helpers.rb'
 
 feature 'Starting a new game' do
   scenario 'asks the user for their name' do
@@ -143,11 +144,35 @@ feature 'Starting a new game' do
   end
 
   scenario 'the opponent\'s board can record a hit' do
-    visit '/New_Game'
-    click_button('Start')
-    fill_in('fire', with: 'C3')
-    click_button('Fire!')
-    expect(page).to have_content(
+    in_browser(:one) do
+      visit '/Start'
+      fill_in('name', with: 'Bob')
+      click_button('Submit')
+      click_button('Submit')
+      
+    end
+
+    in_browser(:two) do
+      visit '/Start'
+      fill_in('name', with: 'Bill')
+      click_button('Submit')
+      click_button('Submit')
+    end
+
+    in_browser(:one) do
+      select 'Submarine', from: 'ship'
+      fill_in('coordinates', with: 'C3')
+      select "Vertical", from: "orientation"
+      click_button('Submit')
+      click_button('Start')
+    end
+
+    in_browser(:two) do
+      
+      click_button('Start')
+      fill_in('fire', with: 'C3')
+      click_button('Fire!')
+      expect(page).to have_content(
   'ABCDEFGHIJ
   ------------
  1|          |1
@@ -162,5 +187,6 @@ feature 'Starting a new game' do
 10|          |10
   ------------
    ABCDEFGHIJ')
+    end
   end
 end
