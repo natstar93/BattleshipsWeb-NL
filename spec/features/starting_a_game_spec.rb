@@ -81,7 +81,32 @@ feature 'Starting a new game' do
 
   #WORST TEST EVER
   scenario 'the gameplay page should show the player\'s board' do
-    visit '/Gameplay'
+    visit '/New_Game'
+    click_button('Start')
     expect(page).to have_content('ABCDEFGHIJ')
+  end
+
+  scenario 'the gameplay page shows the opponent\'s board' do
+    visit '/New_Game'
+    select 'Submarine', from: 'ship'
+    fill_in('coordinates', with: 'A1')
+    select "Vertical", from: "orientation"
+    click_button('Submit')
+    click_button('Start')
+    expect(page).to have_content(
+  'ABCDEFGHIJ
+  ------------
+ 1|          |1
+ 2|          |2
+ 3|          |3
+ 4|          |4
+ 5|          |5
+ 6|          |6
+ 7|          |7
+ 8|          |8
+ 9|          |9
+10|          |10
+  ------------
+   ABCDEFGHIJ')
   end
 end
