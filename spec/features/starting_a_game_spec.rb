@@ -140,5 +140,27 @@ feature 'Starting a new game' do
 10|          |10
   ------------
    ABCDEFGHIJ')
-  end 
+  end
+
+  scenario 'the opponent\'s board can record a hit' do
+    visit '/New_Game'
+    click_button('Start')
+    fill_in('fire', with: 'C3')
+    click_button('Fire!')
+    expect(page).to have_content(
+  'ABCDEFGHIJ
+  ------------
+ 1|          |1
+ 2|          |2
+ 3|  *       |3
+ 4|          |4
+ 5|          |5
+ 6|          |6
+ 7|          |7
+ 8|          |8
+ 9|          |9
+10|          |10
+  ------------
+   ABCDEFGHIJ')
+  end
 end

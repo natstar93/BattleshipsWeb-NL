@@ -4,6 +4,8 @@ require 'battleships'
 
 class BattleshipsWeb < Sinatra::Base
 
+  enable :sessions
+
   set :views, proc { File.join(root, '..', 'views')}
 
   get '/' do
@@ -17,12 +19,19 @@ class BattleshipsWeb < Sinatra::Base
 
   get '/Welcome' do
     @name = params[:name]
+    session[:name] = @name
+    if $game
+      session[:player] = 'player_2'
+    else
+      session[:player] = 'player_1'
+    end
     erb :welcome
   end
 
   get '/New_Game' do
     $game = Game.new Player, Board
     @name = params[:name]
+    p session[:player]
     erb :new_game
   end
 
@@ -36,7 +45,7 @@ class BattleshipsWeb < Sinatra::Base
 
   post '/Gameplay' do
     @fire = params[:fire]
-    if @fire       
+    if @fire
       $game.player_1.shoot @fire.to_sym
     end
     erb :gameplay
