@@ -35,9 +35,12 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   post '/Gameplay' do
+    @fire = params[:fire]
+    if @fire       
+      $game.player_1.shoot @fire.to_sym
+    end
     erb :gameplay
   end
-
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

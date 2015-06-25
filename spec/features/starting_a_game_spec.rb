@@ -119,4 +119,26 @@ feature 'Starting a new game' do
     click_button('Start')
     expect(page).to have_selector('#Fire')
   end
+
+  scenario 'the opponent\'s board can record a miss' do
+    visit '/New_Game'
+    click_button('Start')
+    fill_in('fire', with: 'A1')
+    click_button('Fire!')
+    expect(page).to have_content(
+  'ABCDEFGHIJ
+  ------------
+ 1|-         |1
+ 2|          |2
+ 3|          |3
+ 4|          |4
+ 5|          |5
+ 6|          |6
+ 7|          |7
+ 8|          |8
+ 9|          |9
+10|          |10
+  ------------
+   ABCDEFGHIJ')
+  end 
 end
