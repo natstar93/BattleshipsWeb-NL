@@ -1,6 +1,10 @@
-<pre><%= $game.own_board_view $game.player_1 %></pre>
-<pre><%= $game.opponent_board_view $game.player_1 %></pre>
-
+<% if session[:player] == 'player_1' %>
+  <pre><%= $game.own_board_view $game.player_1 %></pre>
+  <pre><%= $game.opponent_board_view $game.player_1 %></pre>
+<% else %>
+  <pre><%= $game.own_board_view $game.player_2 %></pre>
+  <pre><%= $game.opponent_board_view $game.player_2 %></pre>
+<% end %>
 <form id="Fire" action="/Gameplay" method="post">
   <input type="text" name="fire" >
   <input type="submit" value="Fire!">

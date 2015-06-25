@@ -39,14 +39,22 @@ class BattleshipsWeb < Sinatra::Base
     @ship = params[:ship]
     @coordinates = params[:coordinates]
     @orientation = params[:orientation]
-    content = $game.player_1.place_ship Ship.new(@ship), @coordinates, @orientation
+    if session[:player] == 'player_1'
+      $game.player_1.place_ship Ship.new(@ship), @coordinates, @orientation
+    else
+      $game.player_2.place_ship Ship.new(@ship), @coordinates, @orientation
+    end
     erb :new_game
   end
 
   post '/Gameplay' do
     @fire = params[:fire]
     if @fire
-      $game.player_1.shoot @fire.to_sym
+      if session[:player] == 'player_1'
+        $game.player_1.shoot @fire.to_sym
+      else
+        $game.player_2.shoot @fire.to_sym
+      end
     end
     erb :gameplay
   end

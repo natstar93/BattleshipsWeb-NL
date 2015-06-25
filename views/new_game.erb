@@ -1,6 +1,9 @@
 <div>
-
+  <% if session[:player] == 'player_1' %>
     <pre><%= $game.own_board_view $game.player_1 %></pre>
+  <% else %>
+    <pre><%= $game.own_board_view $game.player_2 %></pre>
+  <% end %>
 
      Please place a ship
       <form action="/New_Game" method="post">
