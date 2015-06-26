@@ -1,7 +1,13 @@
 require 'spec_helper'
 require_relative 'helpers.rb'
 
+
 feature 'Starting a new game' do
+  
+  before(:each) do
+    $game = nil
+  end
+
   scenario 'asks the user for their name' do
     visit '/'
     click_link 'New Game'
@@ -142,14 +148,15 @@ feature 'Starting a new game' do
   ------------
    ABCDEFGHIJ')
   end
-
+  
   scenario 'the opponent\'s board can record a hit' do
+    
+
     in_browser(:one) do
       visit '/Start'
       fill_in('name', with: 'Bob')
       click_button('Submit')
-      click_button('Submit')
-      
+      click_button('Submit')     
     end
 
     in_browser(:two) do
@@ -168,7 +175,6 @@ feature 'Starting a new game' do
     end
 
     in_browser(:two) do
-      
       click_button('Start')
       fill_in('fire', with: 'C3')
       click_button('Fire!')
